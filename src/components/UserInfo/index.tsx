@@ -1,15 +1,21 @@
 import {Button, Card, Divider, Input, Space} from "antd";
-import {useSelector} from "../../store/hooks";
+import {useSelector, useDispatch} from "../../store/hooks";
+import {useState} from "react";
+import {changeNameAction} from "../../store/userReducer/userActionCreator";
 
 const UserInfo = () => {
+    const [name, setName] = useState('')
     const user = useSelector((state) => state.userReducer.userInfo)
     const type = useSelector((state) => state.settingReducer.type)
+    const dispatch = useDispatch()
+    const changeName = () => dispatch(changeNameAction(name))
+
     return (
         <Card>
             <Space>
                 <p>用户名：{user.name}</p>
-                <Input/>
-                <Button type={type}>修改姓名</Button>
+                <Input value={name} onChange={(e) => setName(e.target.value)}/>
+                <Button type={type} onClick={changeName}>修改姓名</Button>
             </Space>
             <Divider/>
             <Space>
