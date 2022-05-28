@@ -13,6 +13,6 @@ const store = createStore(rootReducer, composeEnhancers(applyMiddleware()));
 
 export type RootState = ReturnType<typeof store.getState>
 
-export const SettingProvider: React.FC<any> = ({children}) => {
+export const StoreProvider: React.FC<any> = ({children}) => {
     return <Provider store={store}>{children}</Provider>
 }
