@@ -1,3 +1,5 @@
+import userActionsEnum from "./userActionsEnum";
+
 export interface UserState {
     userInfo: UserInfo
 }
@@ -18,7 +20,7 @@ const defaultState: UserState = {
 
 const userReducer = (state: UserState = defaultState, action: ActionType): UserState => {
     switch (action.type) {
-        case 'changeName':
+        case userActionsEnum.changeName:
             return {
                 ...state,
                 userInfo: {
@@ -26,7 +28,7 @@ const userReducer = (state: UserState = defaultState, action: ActionType): UserS
                     name: action.payload
                 }
             }
-        case 'changeAge':
+        case userActionsEnum.changeAge:
             return {
                 ...state,
                 userInfo: {
