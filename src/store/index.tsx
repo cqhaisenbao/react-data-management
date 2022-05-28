@@ -2,9 +2,11 @@ import {applyMiddleware, combineReducers, createStore} from 'redux'
 import React from "react";
 import {Provider} from "react-redux";
 import settingReducer from "./settingReducer";
+import userReducer from "./userReducer";
 
 const rootReducer = combineReducers({
-    settingReducer
+    settingReducer,
+    userReducer
 })
 
 // @ts-ignore
