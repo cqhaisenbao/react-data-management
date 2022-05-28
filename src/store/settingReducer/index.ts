@@ -4,11 +4,6 @@ export interface SettingState {
     type: ButtonType
 }
 
-interface ActionType {
-    type: string
-    payload?: any
-}
-
 const defaultState: SettingState = {
     type: 'primary'  // 按钮类型
 }
