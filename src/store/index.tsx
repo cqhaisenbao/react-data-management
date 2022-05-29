@@ -5,11 +5,13 @@ import settingReducer from "./settingReducer";
 import userReducer from "./userReducer";
 import {actionLog} from "./middleware/actionLog";
 import {productDetailSlice} from "./productDetail/slice";
+import {changePriceSlice} from "./changePriceReducer/slice";
 
 const rootReducer = combineReducers({
     settingReducer,
     userReducer,
-    productDetailSlice: productDetailSlice.reducer
+    productDetailSlice: productDetailSlice.reducer,
+    changePriceSlice: changePriceSlice.reducer
 })
 
 const store = configureStore({
