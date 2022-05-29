@@ -1,5 +1,10 @@
 import userActionsEnum from "./userActionsEnum";
 import {UserInfo} from "./index";
+import {ThunkAction} from "redux-thunk";
+import {RootState} from "../index";
+import {getUserInfo} from "../../api";
+
+export type UserThunkAction = ThunkAction<void, RootState, unknown, SetUserInfoAction>
 
 interface ChangeNameAction {
     type: typeof userActionsEnum.changeName,
@@ -32,3 +37,9 @@ export const setUserInfoAction = (payload: UserInfo): SetUserInfoAction => ({
     type: userActionsEnum.setUserInfo,
     payload
 })
+
+export const fetchUserInfo = (): UserThunkAction =>
+    async (dispatch) => {
+        const res = await getUserInfo()
+        dispatch(setUserInfoAction(res))
+    }
