@@ -1,6 +1,8 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {getProduct} from "../../api";
+import {useSelector, useDispatch} from "../../store/hooks";
 import {Card, Spin} from "antd";
+import {productDetailSlice} from "../../store/productDetail/slice";
 
 export interface Product {
     name: string
@@ -8,17 +10,19 @@ export interface Product {
 }
 
 const DetailPage = () => {
-    const [loading, setLoading] = useState(true);
-    const [product, setProduct] = useState<Product | null>(null);
+    const loading = useSelector((state) => state.productDetailSlice.loading);
+    const product = useSelector((state) => state.productDetailSlice.data);
+    const dispatch = useDispatch();
     useEffect(() => {
         fetchProduct().then()
     }, [])
     const fetchProduct = async () => {
-        setLoading(true);
-        const data = await getProduct().catch(e => console.log(e))
-        setLoading(false)
+        dispatch(productDetailSlice.actions.fetchStart())
+        const data = await getProduct().catch(e => {
+            dispatch(productDetailSlice.actions.fetchError(e))
+        })
         if (data) {
-            setProduct(data)
+            dispatch(productDetailSlice.actions.fetchSuccess(data))
             console.log(data)
         }
     }
