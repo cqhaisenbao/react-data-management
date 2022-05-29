@@ -1,4 +1,5 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction, createAsyncThunk} from "@reduxjs/toolkit";
+import {getProduct} from "../../api";
 
 interface ProductDetailState {
     loading: boolean
@@ -12,19 +13,26 @@ const initialState: ProductDetailState = {
     data: null
 }
 
+export const getProductDetail = createAsyncThunk<any, number>(
+    'productDetail/getProductDetail',
+    async () => {
+        return await getProduct()
+    })
+
 export const productDetailSlice = createSlice({
     name: 'productDetail',
     initialState,
-    reducers: {
-        fetchStart: (state) => {
+    reducers: {},
+    extraReducers: {  // 处理异步reducer
+        [getProductDetail.pending.type]: (state) => {
             state.loading = true
         },
-        fetchSuccess: (state, action) => {
+        [getProductDetail.fulfilled.type]: (state, action) => {
             state.loading = false
             state.data = action.payload
             state.error = null
         },
-        fetchError: (state, action: PayloadAction<string | null>) => {
+        [getProductDetail.rejected.type]: (state, action: PayloadAction<string | null>) => {
             state.loading = false
             state.error = action.payload
         }

@@ -1,8 +1,7 @@
 import {useEffect} from "react";
-import {getProduct} from "../../api";
 import {useSelector, useDispatch} from "../../store/hooks";
 import {Card, Spin} from "antd";
-import {productDetailSlice} from "../../store/productDetail/slice";
+import {getProductDetail} from "../../store/productDetail/slice";
 
 export interface Product {
     name: string
@@ -12,20 +11,10 @@ export interface Product {
 const DetailPage = () => {
     const loading = useSelector((state) => state.productDetailSlice.loading);
     const product = useSelector((state) => state.productDetailSlice.data);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        fetchProduct().then()
-    }, [])
-    const fetchProduct = async () => {
-        dispatch(productDetailSlice.actions.fetchStart())
-        const data = await getProduct().catch(e => {
-            dispatch(productDetailSlice.actions.fetchError(e))
-        })
-        if (data) {
-            dispatch(productDetailSlice.actions.fetchSuccess(data))
-            console.log(data)
-        }
-    }
+    const dispatch = useDispatch<any>();
+
+    useEffect(() => dispatch(getProductDetail(1)), [])
+
     return (
         <Spin spinning={loading}>
             <Card>
