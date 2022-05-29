@@ -12,10 +12,9 @@ const rootReducer = combineReducers({
     productDetailSlice: productDetailSlice.reducer
 })
 
-// @ts-ignore
 const store = configureStore({
     reducer: rootReducer,
-    middleware: [actionLog]
+    middleware: (getDefaultMiddleware) => ([...getDefaultMiddleware(), actionLog])
 });
 
 export type RootState = ReturnType<typeof store.getState>
