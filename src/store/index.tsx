@@ -1,19 +1,22 @@
-import {applyMiddleware, combineReducers, createStore} from 'redux'
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import React from "react";
-// import thunk from "redux-thunk";
 import {Provider} from "react-redux";
 import settingReducer from "./settingReducer";
 import userReducer from "./userReducer";
 import {actionLog} from "./middleware/actionLog";
+import {productDetailSlice} from "./productDetail/slice";
 
 const rootReducer = combineReducers({
     settingReducer,
-    userReducer
+    userReducer,
+    productDetailSlice: productDetailSlice.reducer
 })
 
 // @ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(actionLog)));
+const store = configureStore({
+    reducer: rootReducer,
+    middleware: [actionLog]
+});
 
 export type RootState = ReturnType<typeof store.getState>
 
