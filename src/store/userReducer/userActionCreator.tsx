@@ -2,9 +2,11 @@ import userActionsEnum from "./userActionsEnum";
 import {UserInfo} from "./index";
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "../index";
-import {getUserInfo} from "../../api";
+import {getUserInfo, setAge} from "../../api";
+import {message} from "antd";
 
 export type UserThunkAction = ThunkAction<void, RootState, unknown, SetUserInfoAction>
+export type ChangeAgeThunkAction = ThunkAction<void, RootState, unknown, ChangeAgeAction>
 
 interface ChangeNameAction {
     type: typeof userActionsEnum.changeName,
@@ -20,8 +22,6 @@ interface SetUserInfoAction {
     type: typeof userActionsEnum.setUserInfo,
     payload: UserInfo
 }
-
-export type UserActionTypes = ChangeNameAction | ChangeAgeAction;
 
 export const changeNameAction = (name: string): ChangeNameAction => ({
     type: userActionsEnum.changeName,
@@ -43,3 +43,14 @@ export const fetchUserInfo = (): UserThunkAction =>
         const res = await getUserInfo()
         dispatch(setUserInfoAction(res))
     }
+
+export const changeAgeActionAsync = (age: number): ChangeAgeThunkAction => {
+    return async (dispatch) => {
+        const res = await setAge(age).catch((err) => {
+            message.error(`修改年龄失败：${err}`)
+        })
+        if (res) {
+            dispatch(changeAgeAction(age))
+        }
+    }
+}

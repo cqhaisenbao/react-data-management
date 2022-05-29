@@ -8,3 +8,11 @@ export const getUserInfo = async () => {
         }, 1000);
     })
 }
+
+export const setAge = async (age: number): Promise<number> => {
+    return new Promise<any>((resolve, reject) => {
+        setTimeout(() => {
+            reject(age);
+        }, 1000);
+    })
+}
