@@ -20,6 +20,11 @@ const defaultState: UserState = {
 
 const userReducer = (state: UserState = defaultState, action: ActionType): UserState => {
     switch (action.type) {
+        case userActionsEnum.setUserInfo:
+            return {
+                ...state,
+                userInfo: action.payload
+            }
         case userActionsEnum.changeName:
             return {
                 ...state,

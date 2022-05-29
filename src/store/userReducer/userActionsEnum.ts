@@ -4,6 +4,8 @@ const userActionsEnum = {
     changeName: `${namespace}/changeName`,
     // 修改年龄
     changeAge: `${namespace}/changeAge`,
+    // 设置用户信息
+    setUserInfo: `${namespace}/setUserInfo`,
 }
 
 export default userActionsEnum;

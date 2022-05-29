@@ -1,7 +1,8 @@
 import {Button, Card, Divider, Input, Space} from "antd";
 import {useSelector, useDispatch} from "../../store/hooks";
-import {useState} from "react";
-import {changeNameAction} from "../../store/userReducer/userActionCreator";
+import {useEffect, useState} from "react";
+import {changeNameAction, setUserInfoAction} from "../../store/userReducer/userActionCreator";
+import {getUserInfo} from "../../api";
 
 const UserInfo = () => {
     const [name, setName] = useState('')
@@ -9,6 +10,15 @@ const UserInfo = () => {
     const type = useSelector((state) => state.settingReducer.type)
     const dispatch = useDispatch()
     const changeName = () => dispatch(changeNameAction(name))
+
+    useEffect(() => {
+        fetchUserInfo()
+    }, [])
+
+    const fetchUserInfo = async () => {
+        const res = await getUserInfo()
+        dispatch(setUserInfoAction(res))
+    }
 
     return (
         <Card>
