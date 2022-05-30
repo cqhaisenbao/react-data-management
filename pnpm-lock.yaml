@@ -12,6 +12,7 @@ specifiers:
   react-dom: ^17.0.2
   react-redux: ^8.0.2
   redux: ^4.2.0
+  redux-persist: ^6.0.0
   redux-thunk: ^2.4.1
   typescript: ^4.6.3
   vite: ^2.9.9
@@ -24,6 +25,7 @@ dependencies:
   react-dom: 17.0.2_react@17.0.2
   react-redux: 8.0.2_58b4341d21997c46e3cf392938c70406
   redux: 4.2.0
+  redux-persist: 6.0.0_redux@4.2.0
   redux-thunk: 2.4.1_redux@4.2.0
 
 devDependencies:
@@ -1750,6 +1752,14 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
+    dev: false
+
+  /redux-persist/6.0.0_redux@4.2.0:
+    resolution: {integrity: sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==}
+    peerDependencies:
+      redux: '>4.0.0'
+    dependencies:
+      redux: 4.2.0
     dev: false
 
   /redux-thunk/2.4.1_redux@4.2.0:
