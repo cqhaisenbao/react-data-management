@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction, createAsyncThunk} from "@reduxjs/toolkit";
 import {getProduct} from "../../api";
+import {changePriceSlice} from "../changePriceReducer/slice";
 
 interface ProductDetailState {
     loading: boolean
@@ -35,6 +36,9 @@ export const productDetailSlice = createSlice({
         [getProductDetail.rejected.type]: (state, action: PayloadAction<string | null>) => {
             state.loading = false
             state.error = action.payload
+        },
+        [changePriceSlice.actions.changePrice.type]: (state, action: PayloadAction<number>) => {
+            state.data.price = action.payload
         }
     }
 })
